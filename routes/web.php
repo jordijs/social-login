@@ -22,7 +22,9 @@ Route::get('/', function () {
 
 //Redirect route to GitHub OAuth
 Route::get('/auth/redirect', function () {
-    return Socialite::driver('github')->redirect();
+    return Socialite::driver('github')
+    ->scopes(['read:user', 'public_repo'])
+    ->redirect();
 });
 
 // Receive the callback from GitHub after authentication
@@ -41,6 +43,7 @@ Route::get('/auth/callback', function () {
  
     Auth::login($user);
  
+    
     return redirect('/dashboard');
 });
 
