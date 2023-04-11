@@ -13,9 +13,10 @@ return new class extends Migration
     {
         Schema::create('users', function (Blueprint $table) {
             $table->id();
-            $table->string('github_id')->unique();
+            $table->bigInteger('github_id')->unique();
             $table->string('github_username')->unique();
             $table->string('github_access_token')->unique();
+            $table->string('github_refresh_token')->unique()->nullable();
             $table->rememberToken();
             $table->timestamps();
         });
