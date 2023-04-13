@@ -2,6 +2,7 @@
 
 > Implementation of social login using github. Solution for this hackathon: https://nuwe.io/dev/competitions/job-barcelona-23/jobarcelona-23-backend
 
+[![CodeFactor](https://www.codefactor.io/repository/github/jordijs/social-login/badge)](https://www.codefactor.io/repository/github/jordijs/social-login)
 
 ## API
 Initial route:
