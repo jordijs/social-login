@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id();
             $table->bigInteger('github_id')->unique();
             $table->string('github_username')->unique();
-            $table->string('github_access_token')->unique();
+            $table->string('github_access_token')->unique()->nullable();
             $table->string('github_refresh_token')->unique()->nullable();
             $table->rememberToken();
             $table->timestamps();
