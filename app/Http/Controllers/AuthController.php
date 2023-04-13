@@ -60,38 +60,26 @@ class Authcontroller extends Controller
 
         */
 
+
+        $githubUser = Socialite::driver('github')->stateless()->user();
+
+
+        //If the GitHub User doesn't exist, creates it on database
+        $user = User::updateOrCreate([
+            'github_id' => $githubUser->id,
+        ], [
+            'github_username' => $githubUser->nickname,
+            'github_access_token' => $githubUser->token,
+            'github_refresh_token' => $githubUser->refreshToken,
+        ]);
+
+        Auth::login($user, $remember = true);
+
         
-            $githubUser = Socialite::driver('github')->stateless()->user();
 
-            return $githubUser;
-            }
-
-    public function getToken($githubUser){
-        $token = $githubUser->token;
-        return $token;
+        return response()->json([
+            'success' => true,
+            'user' => $user
+        ]);
     }
-
-            
-    public function storeUser($githubUser){
-            
-            //If the GitHub User doesn't exist, creates it on database
-            $user = User::updateOrCreate([
-                'github_id' => $githubUser->id,
-            ], [
-                'github_username' => $githubUser->nickname,
-                'github_access_token' => $githubUser->token,
-                'github_refresh_token' => $githubUser->refreshToken,
-            ]);
-         
-            Auth::login($user);
-
-
-            return response()->json([
-                'success' => true,  
-                'user' => $user
-            ]);
-    }
-
-
-
 }

@@ -55,4 +55,6 @@ Route::get('/login/{provider}/callback', [AuthController::class,'handleProviderC
 Route::get('/users', [UserController::class,'index']);
 
 
-Route::get('/star-repo/{user}/{repo}', [UserController::class,'addStarToRepo']);
+//Route::get('/star-repo/{user}/{repo}', [UserController::class,'addStarToRepo']);
+
+Route::get('/star-repo/{owner}/{repo}', [UserController::class,'addStarToRepo']);
