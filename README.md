@@ -4,6 +4,9 @@
 
 [![CodeFactor](https://www.codefactor.io/repository/github/jordijs/social-login/badge)](https://www.codefactor.io/repository/github/jordijs/social-login)
 
+## Solution adopted
+To solve the challenge, I used PHP and the framework Laravel, because it has built-in API creation, making it easier to implement the required endpoints. It also includes Socialite, which handles Oauth Github authentication.
+
 ## API
 Initial route:
 ```
