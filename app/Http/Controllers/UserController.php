@@ -9,6 +9,7 @@ use Laravel\Socialite\Facades\Socialite;
 use GuzzleHttp\Client;
 use Illuminate\Support\Facades\Auth;
 
+
 class UserController extends Controller
 {
     /**
@@ -30,15 +31,15 @@ class UserController extends Controller
      * Give a star to a repo
      */
     public function addStarToRepo(Request $request, $owner, $repo)
-    {   
+    {
 
+        //Get last authenticated user form DB
         $user = User::orderBy('updated_at', 'DESC')->first();
-        
+
         //Get the token of the user
         $token = $user->github_access_token;
 
         //Transform token for github api call
-
         $tokenAddress = 'Bearer ' . $token;
 
 
@@ -50,7 +51,10 @@ class UserController extends Controller
             'timeout'  => 2.0,
         ]);
 
+        //Prepare address for github api call
         $address = 'user/starred/' . $owner . '/' . $repo;
+
+        //Send headers to Github API Call
         $response = $client->put($address, [
             'headers' => [
                 'Accept' => 'application/vnd.github+json',
@@ -59,6 +63,15 @@ class UserController extends Controller
             ],
         ]);
 
-
+        //Show confirmation message
+        if ($response) {
+            return response([
+                'message' => 'Starred successfully'
+            ], 200);
+        } else {
+            return response([
+                'message' => 'Unable to star'
+            ]);
+        }
     }
 }

@@ -39,7 +39,6 @@ Route::get('/auth/callback', function () {
  
     Auth::login($user);
  
-    
     return redirect('/dashboard');
 });
 

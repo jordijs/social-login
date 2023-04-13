@@ -36,31 +36,6 @@ class Authcontroller extends Controller
     public function handleProviderCallback($provider)
     {
 
-        /*
-        try {
-            $user = Socialite::driver($provider)->stateless()->user();
-        } catch (ClientException $exception) {
-            return response()->json(['error' => 'Invalid credentials provided.'], 422);
-        }
-
-        $userCreated = User::firstOrCreate(
-            [
-                'github_id' => $user->getId()
-            ],
-            [
-                //'email_verified_at' => now(),
-                'github_username' => $user->getNickname(),
-                'github_access_token' => $user->token,
-                'github_refresh_token' => $user->refreshToken,
-                //'status' => true,
-            ]
-        );
-      
-        //$token = $userCreated->createToken('token-name')->plainTextToken;
-
-        */
-
-
         $githubUser = Socialite::driver('github')->stateless()->user();
 
 
@@ -75,7 +50,6 @@ class Authcontroller extends Controller
 
         Auth::login($user, $remember = true);
 
-        
 
         return response()->json([
             'success' => true,
