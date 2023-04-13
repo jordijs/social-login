@@ -16,9 +16,6 @@ use Laravel\Socialite\Facades\Socialite;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
 
 //Redirect route to GitHub OAuth
 Route::get('/auth/redirect', function () {
